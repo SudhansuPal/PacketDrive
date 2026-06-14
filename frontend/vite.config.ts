@@ -7,6 +7,9 @@ import react from "@vitejs/plugin-react";
 const backend = process.env.VITE_BACKEND ?? "http://127.0.0.1:8000";
 
 export default defineConfig({
+  // Relative asset URLs so the production build loads over file:// in the
+  // Electron shell (absolute "/assets/..." would resolve to the FS root there).
+  base: "./",
   plugins: [react()],
   server: {
     port: 5173,
