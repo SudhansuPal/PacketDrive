@@ -16,7 +16,10 @@ class Settings(BaseSettings):
     # --- Server ---
     host: str = "127.0.0.1"
     port: int = 8000
-    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+    # Local-only desktop/dev tool: default to wildcard so both the Vite dev
+    # server and the Electron file:// shell can reach the API. Override with
+    # PD_CORS_ORIGINS to lock down to specific origins (re-enables credentials).
+    cors_origins: list[str] = ["*"]
 
     # --- Capture ---
     # When True (or when scapy/root is unavailable) the backend emits synthetic

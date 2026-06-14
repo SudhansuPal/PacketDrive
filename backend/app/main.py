@@ -43,10 +43,14 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="PacketDrive", version="0.1.0", lifespan=lifespan)
 
+_cors_origins = get_settings().cors_origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=get_settings().cors_origins,
-    allow_credentials=True,
+    allow_origins=_cors_origins,
+    # The Electron desktop shell serves the UI over file:// (origin "null"),
+    # which only a wildcard accepts. Wildcard origins forbid credentials, and
+    # the app sends none, so credentials track whether origins are wildcarded.
+    allow_credentials="*" not in _cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )

@@ -4,6 +4,7 @@ import { StatsHud } from "./components/StatsHud";
 import { AlertsFeed } from "./components/AlertsFeed";
 import { ConnectionBadge } from "./components/ConnectionBadge";
 import { useLiveFeed } from "./hooks/useLiveFeed";
+import { apiUrl } from "./lib/endpoints";
 import type { HighwayEngine } from "./engine/highway";
 import type { Alert, Health, ServerFrame, Stats } from "./types/packet";
 
@@ -36,7 +37,7 @@ export default function App() {
     let active = true;
     const load = async () => {
       try {
-        const res = await fetch("/api/health");
+        const res = await fetch(apiUrl("/api/health"));
         if (!res.ok) return;
         const data = (await res.json()) as Health;
         if (active) setHealth(data);

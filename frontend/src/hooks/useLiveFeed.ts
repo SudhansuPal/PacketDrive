@@ -1,15 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { ServerFrame } from "../types/packet";
+import { wsUrl } from "../lib/endpoints";
 
 export type ConnectionState = "connecting" | "open" | "reconnecting" | "closed";
-
-/** Build the ws:// URL for the same-origin /ws endpoint (proxied to the backend in dev). */
-function wsUrl(): string {
-  const override = import.meta.env.VITE_WS_URL as string | undefined;
-  if (override) return override;
-  const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
-  return `${proto}//${window.location.host}/ws`;
-}
 
 /**
  * Subscribe to the backend packet/alert/stats stream.
