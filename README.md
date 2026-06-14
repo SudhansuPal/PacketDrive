@@ -262,4 +262,5 @@ data. Use it responsibly:
 
 ## License
 
-Educational project — no warranty. Add a license of your choice before sharing.
+Released under the [MIT License](LICENSE) — free to use, modify, and share,
+with no warranty.
